@@ -70,8 +70,8 @@
         />
         <vInput
           class="number-theory__input"
-          v-model="inversionForm.p"
-          placeholder="Введите число p:"
+          v-model="inversionForm.mod"
+          placeholder="Введите модуль mod:"
         />
 
         <span class="number-theory__span"
@@ -90,6 +90,11 @@
 </template>
 
 <script>
+import {
+  exponentiationNumberMod,
+  nod,
+  inverseNumberMod,
+} from "@/helpers/functions.js";
 import vInput from "@/components/vInput";
 import vButton from "@/components/vButton";
 
@@ -116,79 +121,45 @@ export default {
       },
       inversionForm: {
         x: null,
-        p: null,
+        mod: null,
         answer: null,
         loading: false,
       },
     };
   },
   methods: {
-    exponentiationFunc(a, n, m) {
-      let c = 1;
-
-      for (let index = 1; index <= n; index++)
-        c = (parseInt(c) * parseInt(a)) % parseInt(m);
-
-      return c;
-    },
-    nodFunc(a, b) {
-      let u = [a, 1, 0];
-      let v = [b, 0, 1];
-      let q = 0;
-      let t = 0;
-
-      while (v[0] !== 0) {
-        q = u[0] / v[0];
-        t = [u[0] % v[0], u[1] - q * v[1], u[2] - q * v[2]];
-        u = v;
-        v = t;
-      }
-
-      return u;
-    },
-    inversionFunc(x, p) {
-      let a = x;
-      let b = p;
-      let result = 0;
-
-      if (a !== 0 && b !== 0) {
-        if (a < 0) {
-          a = b - (a % b);
-        } else {
-          a = a % b;
-        }
-
-        result = this.nodFunc(b, a);
-      }
-
-      if (result[2] < 0) {
-        result[2] = parseInt(b) + parseInt(result[2]);
-      }
-
-      console.log("result", result);
-
-      return result[2];
-    },
     onSubmitExponentiation() {
       let { a, n, m } = this.exponentiationForm;
 
       this.exponentiationForm.loading = true;
-      this.exponentiationForm.answer = this.exponentiationFunc(a, n, m);
-      this.exponentiationForm.loading = false;
+
+      setTimeout(() => {
+        this.exponentiationForm.answer = exponentiationNumberMod(a, n, m);
+        this.exponentiationForm.loading = false;
+      }, 200);
     },
     onSubmitDivisor() {
       let { a, b } = this.divisorForm;
 
       this.divisorForm.loading = true;
-      this.divisorForm.answer = this.nodFunc(a, b)[0];
-      this.divisorForm.loading = false;
+
+      setTimeout(() => {
+        this.divisorForm.answer = nod(a, b)[0];
+        this.divisorForm.loading = false;
+      }, 200);
     },
     onSubmitInversion() {
-      let { x, p } = this.inversionForm;
+      let { x, mod } = this.inversionForm;
 
       this.inversionForm.loading = true;
-      this.inversionForm.answer = this.inversionFunc(x, p);
-      this.inversionForm.loading = false;
+
+      setTimeout(() => {
+        this.inversionForm.answer = inverseNumberMod(
+          parseInt(x),
+          parseInt(mod)
+        );
+        this.inversionForm.loading = false;
+      }, 200);
     },
   },
 };

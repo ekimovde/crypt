@@ -2,9 +2,7 @@
 export const generatePrimeNumber = (size) => {
   let randomNumber = Math.floor(Math.random() * size);
 
-  while (!isPrime(randomNumber)) {
-    randomNumber++;
-  }
+  while (!isPrime(randomNumber)) randomNumber++;
 
   return randomNumber;
 };
@@ -22,11 +20,11 @@ export const isPrime = (number) => {
   return true;
 };
 
-// Проверка числа в степень по модулю
+// Возведение числа в степень по модулю
 export const exponentiationNumberMod = (a, n, mod) => {
   let y = 1;
   let s = parseInt(a);
-  let array = n.toString(2).split("").reverse();
+  let array = parseInt(n).toString(2).split("").reverse();
   array = array.map((el) => parseInt(el));
 
   for (let i = 0; i < array.length; i++) {
@@ -45,8 +43,12 @@ export const nod = (a, b) => {
   let t = 0;
 
   while (v[0] !== 0) {
-    q = u[0] / v[0];
-    t = [u[0] % v[0], u[1] - q * v[1], u[2] - q * v[2]];
+    q = parseInt(u[0] / v[0]);
+    t = [
+      parseInt(u[0] % v[0]),
+      parseInt(u[1] - q * v[1]),
+      parseInt(u[2] - q * v[2]),
+    ];
     u = v;
     v = t;
   }
@@ -54,26 +56,24 @@ export const nod = (a, b) => {
   return u;
 };
 
-export const inverseNumberMod = (x, p) => {
-  let a = x;
-  let b = p;
-  let result = 0;
+// Вычисление обратного числа по модулю
+export const inverseNumberMod = (a, mod) => {
+  let x = a;
+  let result = [];
 
-  if (a !== 0 && b !== 0) {
-    if (a < 0) {
-      a = b - (a % b);
-    } else {
-      a = a % b;
-    }
+  if (x !== 0 && mod !== 0) {
+    if (x < 0) x = mod - (x % mod);
+    else x = x % mod;
 
-    result = nod(b, a);
+    result = nod(parseInt(mod), x);
+  } else {
+    console.log("Ошибка! Ни один из параметров не должен быть равен нулю!");
   }
 
-  if (result[2] < 0) {
-    result[2] = parseInt(b) + parseInt(result[2]);
-  }
+  if (result[0] !== 1)
+    console.log("Ошибка! Введенные параметры обязаны быть взаимно простыми!");
 
-  console.log("result", result);
+  if (result[2] < 0) result[2] = parseInt(mod) + parseInt(result[2]);
 
-  return result;
+  return result[2];
 };
