@@ -77,3 +77,10 @@ export const inverseNumberMod = (a, mod) => {
 
   return result[2];
 };
+
+// Проверка числа на корректность
+export const checkNumber = (number) => {
+  if (number === null) return false;
+  if (parseInt(number) === 0) return false;
+  return true;
+};

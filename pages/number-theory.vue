@@ -16,8 +16,8 @@
         />
         <vInput
           class="number-theory__input"
-          v-model="exponentiationForm.m"
-          placeholder="Введите mod m:"
+          v-model="exponentiationForm.mod"
+          placeholder="Введите mod:"
         />
 
         <span class="number-theory__span"
@@ -94,6 +94,7 @@ import {
   exponentiationNumberMod,
   nod,
   inverseNumberMod,
+  checkNumber,
 } from "@/helpers/functions.js";
 import vInput from "@/components/vInput";
 import vButton from "@/components/vButton";
@@ -109,7 +110,7 @@ export default {
       exponentiationForm: {
         a: null,
         n: null,
-        m: null,
+        mod: null,
         answer: null,
         loading: false,
       },
@@ -129,37 +130,76 @@ export default {
   },
   methods: {
     onSubmitExponentiation() {
-      let { a, n, m } = this.exponentiationForm;
+      let { a, n, mod } = this.exponentiationForm;
 
-      this.exponentiationForm.loading = true;
+      if (checkNumber(a) && checkNumber(n) && checkNumber(mod)) {
+        this.exponentiationForm.loading = true;
 
-      setTimeout(() => {
-        this.exponentiationForm.answer = exponentiationNumberMod(a, n, m);
-        this.exponentiationForm.loading = false;
-      }, 200);
+        setTimeout(() => {
+          this.exponentiationForm.answer = exponentiationNumberMod(a, n, mod);
+          this.exponentiationForm.loading = false;
+          this.$notify({
+            type: "success",
+            group: "notify",
+            text: "Отлично. Все прошло успешно!",
+          });
+        }, 200);
+      } else {
+        this.$notify({
+          type: "error",
+          group: "notify",
+          text: "Произошла ошибка. Заполните все поля формы!",
+        });
+      }
     },
     onSubmitDivisor() {
       let { a, b } = this.divisorForm;
 
-      this.divisorForm.loading = true;
+      if (checkNumber(a) && checkNumber(b)) {
+        this.divisorForm.loading = true;
 
-      setTimeout(() => {
-        this.divisorForm.answer = nod(a, b)[0];
-        this.divisorForm.loading = false;
-      }, 200);
+        setTimeout(() => {
+          this.divisorForm.answer = nod(a, b)[0];
+          this.divisorForm.loading = false;
+          this.$notify({
+            type: "success",
+            group: "notify",
+            text: "Отлично. Все прошло успешно!",
+          });
+        }, 200);
+      } else {
+        this.$notify({
+          type: "error",
+          group: "notify",
+          text: "Произошла ошибка. Заполните все поля формы!",
+        });
+      }
     },
     onSubmitInversion() {
       let { x, mod } = this.inversionForm;
 
-      this.inversionForm.loading = true;
+      if (checkNumber(x) && checkNumber(mod)) {
+        this.inversionForm.loading = true;
 
-      setTimeout(() => {
-        this.inversionForm.answer = inverseNumberMod(
-          parseInt(x),
-          parseInt(mod)
-        );
-        this.inversionForm.loading = false;
-      }, 200);
+        setTimeout(() => {
+          this.inversionForm.answer = inverseNumberMod(
+            parseInt(x),
+            parseInt(mod)
+          );
+          this.inversionForm.loading = false;
+          this.$notify({
+            type: "success",
+            group: "notify",
+            text: "Отлично. Все прошло успешно!",
+          });
+        }, 200);
+      } else {
+        this.$notify({
+          type: "error",
+          group: "notify",
+          text: "Произошла ошибка. Заполните все поля формы!",
+        });
+      }
     },
   },
 };
