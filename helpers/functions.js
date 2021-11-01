@@ -2,6 +2,8 @@
 export const generatePrimeNumber = (size) => {
   let randomNumber = Math.floor(Math.random() * size);
 
+  if (randomNumber <= 0) randomNumber = Math.floor(Math.random() * size);
+
   while (!isPrime(randomNumber)) randomNumber++;
 
   return randomNumber;
@@ -80,7 +82,9 @@ export const inverseNumberMod = (a, mod) => {
 
 // Проверка числа на корректность
 export const checkNumber = (number) => {
-  if (number === null) return false;
-  if (parseInt(number) === 0) return false;
+  if (number === null || number === "") return false;
+  if (/^[a-zA-Zа-яА-Я]+$/.test(number)) return false;
+  if (parseInt(number) === 0 || parseInt(number) < 1) return false;
+
   return true;
 };

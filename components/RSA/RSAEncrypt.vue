@@ -65,9 +65,6 @@ export default {
       // this.localValue = messageEncryptArray.join("");
       this.$emit("update:messageEncrypt", messageEncryptArray.join(""));
       this.$emit("update:messageEncryptArray", messageEncryptArray);
-
-      // BigInt(Math.pow(2, 330))
-      // str = str.replace(/[^\d]/g, '')
     },
   },
 };

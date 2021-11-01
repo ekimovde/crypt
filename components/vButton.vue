@@ -1,5 +1,10 @@
 <template>
-  <button class="v-button" @click="$emit('click')">
+  <button
+    class="v-button"
+    :class="{ 'v-button_disabled': disabled }"
+    :disabled="disabled"
+    @click="$emit('click')"
+  >
     <i
       v-if="loading"
       class="bx bx-loader-circle bx-spin bx-flip-horizontal v-button__icon"
@@ -20,6 +25,10 @@ export default {
     loading: {
       type: Boolean,
       default: () => false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
 };
@@ -42,6 +51,13 @@ export default {
 
   &:hover
     opacity 0.9
+
+  &_disabled
+    opacity 0.7
+    cursor initial
+
+    &:hover
+      opacity 0.7
 
   &__icon
     font-size 15px

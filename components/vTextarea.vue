@@ -1,5 +1,5 @@
 <template>
-  <textarea class="v-textarea" v-model="localValue" />
+  <textarea class="v-textarea" v-model="localValue" :disabled="disabled" />
 </template>
 
 <script>
@@ -8,7 +8,11 @@ export default {
   props: {
     value: {
       type: [String, Number],
-      default: () => "",
+      default: "",
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {

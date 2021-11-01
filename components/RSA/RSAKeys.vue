@@ -6,8 +6,8 @@
       <label class="rsa-keys__label">Открытый ключ</label>
 
       <div class="rsa-keys__wrapper">
-        <vTextarea v-model="localKeys.publicKey.e" />
-        <vTextarea v-model="localKeys.publicKey.mod" />
+        <vTextarea v-model="localKeys.publicKey.e" disabled />
+        <vTextarea v-model="localKeys.publicKey.mod" disabled />
       </div>
     </div>
 
@@ -15,8 +15,8 @@
       <label class="rsa-keys__label">Закрытый ключ</label>
 
       <div class="rsa-keys__wrapper">
-        <vTextarea v-model="localKeys.privateKey.d" />
-        <vTextarea v-model="localKeys.privateKey.mod" />
+        <vTextarea v-model="localKeys.privateKey.d" disabled />
+        <vTextarea v-model="localKeys.privateKey.mod" disabled />
       </div>
     </div>
 
@@ -24,6 +24,7 @@
       class="rsa-keys__button"
       title="Вычислить ключи"
       :loading="localKeys.loading"
+      :disabled="!disabledButton"
       @click="onCalculateKeys"
     />
   </div>
@@ -34,6 +35,8 @@ import {
   generatePrimeNumber,
   nod,
   inverseNumberMod,
+  checkNumber,
+  isPrime,
 } from "@/helpers/functions";
 import vTextarea from "@/components/vTextarea.vue";
 import vButton from "@/components/vButton.vue";
@@ -59,10 +62,29 @@ export default {
       localKeys: { ...this.keys },
     };
   },
+  computed: {
+    disabledButton() {
+      const { p, q } = this.primeNumbers;
+
+      if (!isPrime(p) || !isPrime(q)) return false;
+      return checkNumber(p) && checkNumber(q);
+    },
+  },
   methods: {
     onCalculateKeys() {
       this.localKeys.loading = true;
       const { p, q, size } = this.primeNumbers;
+
+      if (!p || !q) {
+        this.localKeys.loading = false;
+        this.$notify({
+          type: "error",
+          group: "notify",
+          text: "Произошла ошибка. Вы не заполнили поля с числами!",
+        });
+
+        return;
+      }
 
       // Формирование публичного ключа
       // Вычисление модуля mod
@@ -81,7 +103,7 @@ export default {
       // e = 3;
 
       // Формирование закрытого ключа
-      let d = inverseNumberMod(e, fi)[2];
+      let d = inverseNumberMod(e, fi);
 
       setTimeout(() => {
         this.localKeys.publicKey.mod = mod;

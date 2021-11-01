@@ -6,17 +6,17 @@
       <div class="number-theory__form">
         <vInput
           class="number-theory__input"
-          v-model="exponentiationForm.a"
+          v-model.number="exponentiationForm.a"
           placeholder="Введите число a:"
         />
         <vInput
           class="number-theory__input"
-          v-model="exponentiationForm.n"
+          v-model.number="exponentiationForm.n"
           placeholder="Введите степень n:"
         />
         <vInput
           class="number-theory__input"
-          v-model="exponentiationForm.mod"
+          v-model.number="exponentiationForm.mod"
           placeholder="Введите mod:"
         />
 
@@ -39,12 +39,12 @@
       <div class="number-theory__form">
         <vInput
           class="number-theory__input"
-          v-model="divisorForm.a"
+          v-model.number="divisorForm.a"
           placeholder="Введите число a:"
         />
         <vInput
           class="number-theory__input"
-          v-model="divisorForm.b"
+          v-model.number="divisorForm.b"
           placeholder="Введите число b:"
         />
 
@@ -65,12 +65,12 @@
       <div class="number-theory__form">
         <vInput
           class="number-theory__input"
-          v-model="inversionForm.x"
+          v-model.number="inversionForm.x"
           placeholder="Введите число x:"
         />
         <vInput
           class="number-theory__input"
-          v-model="inversionForm.mod"
+          v-model.number="inversionForm.mod"
           placeholder="Введите модуль mod:"
         />
 
