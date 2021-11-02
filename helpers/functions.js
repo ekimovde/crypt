@@ -1,8 +1,8 @@
 // Генерация случайного простого числа
-export const generatePrimeNumber = (size) => {
-  let randomNumber = Math.floor(Math.random() * size);
+export const generatePrimeNumber = (size, min = 0) => {
+  let randomNumber = Math.floor(Math.random() * size) + min;
 
-  if (randomNumber <= 0) randomNumber = Math.floor(Math.random() * size);
+  if (randomNumber <= 0) randomNumber = Math.floor(Math.random() * size) + min;
 
   while (!isPrime(randomNumber)) randomNumber++;
 
@@ -30,8 +30,8 @@ export const exponentiationNumberMod = (a, n, mod) => {
   array = array.map((el) => parseInt(el));
 
   for (let i = 0; i < array.length; i++) {
-    if (array[i] === 1) y = (y * s) % mod;
-    s = (s * s) % mod;
+    if (array[i] === 1) y = (y * s) % parseInt(mod);
+    s = (s * s) % parseInt(mod);
   }
 
   return y;

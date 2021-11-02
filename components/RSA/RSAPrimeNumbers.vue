@@ -23,7 +23,6 @@
     </div>
 
     <vButton
-      class="rsa-prime-numbers__button"
       title="Сгенерировать простые числа"
       :loading="localValue.loading"
       @click="onGeneratePrimeNumbers"

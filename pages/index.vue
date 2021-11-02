@@ -33,6 +33,10 @@ export default {
           title: "Лабораторная работа #2",
           to: "/rsa",
         },
+        {
+          title: "Лабораторная работа #3",
+          to: "/diffie-hellman",
+        },
       ],
     };
   },

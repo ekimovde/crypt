@@ -59,9 +59,9 @@ export default {
 
       console.log("messageDecryptArray", messageDecryptArray);
 
-      // messageDecryptArray = messageDecryptArray.map((number) => {
-      //   return String.fromCharCode(number);
-      // });
+      messageDecryptArray = messageDecryptArray.map((number) => {
+        return String.fromCharCode(number);
+      });
 
       console.log("Decrypt:", messageDecryptArray);
 

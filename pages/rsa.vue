@@ -63,7 +63,7 @@ export default {
           p: null,
           q: null,
           loading: false,
-          size: 9999999999999999,
+          size: 9999,
         },
         keys: {
           publicKey: {
