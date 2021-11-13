@@ -37,6 +37,14 @@ export default {
           title: "Лабораторная работа #3",
           to: "/diffie-hellman",
         },
+        {
+          title: "Лабораторная работа #4",
+          to: "/shamir",
+        },
+        {
+          title: "Лабораторная работа #5",
+          to: "/el-gamal",
+        },
       ],
     };
   },

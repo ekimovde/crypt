@@ -104,7 +104,7 @@ export default {
       // Открытые ключи
       const { p, g } = this.primeNumbers;
 
-      // Абоненты выбирают случайные большие числа
+      // Абоненты выбирают случайные секретные большие числа
       const Xa = generatePrimeNumber(999999999);
       const Xb = generatePrimeNumber(999999999);
       this.localKeysA.privateKey = Xa;

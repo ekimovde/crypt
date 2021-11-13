@@ -58,10 +58,10 @@ export default {
       this.loading = true;
 
       const { p, q } = this.value;
-      let g = generatePrimeNumber(p - 3, 2);
+      let g = generatePrimeNumber(99);
 
       while (exponentiationNumberMod(g, q, p) === 1)
-        g = generatePrimeNumber(p - 3, 2);
+        g = generatePrimeNumber(99);
 
       setTimeout(() => {
         this.loading = false;
