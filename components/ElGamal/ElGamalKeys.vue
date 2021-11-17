@@ -69,8 +69,8 @@ export default {
       const { p, g } = this.primeNumbers;
 
       // Абоненты выбирают случайные секретные большие числа
-      const Xa = 7; // generatePrimeNumber(999999999);
-      const Xb = 13; // generatePrimeNumber(999999999);
+      const Xa = generatePrimeNumber(999999999);
+      const Xb = generatePrimeNumber(999999999);
 
       // Абонентые вычисляют число Y
       const Ya = exponentiationNumberMod(g, Xa, p);

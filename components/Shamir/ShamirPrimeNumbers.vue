@@ -75,17 +75,17 @@ export default {
       const { size } = this.value;
 
       // Генерация простого числа p
-      const p = 23; // generatePrimeNumber(size);
+      const p = generatePrimeNumber(size);
       console.log("p:", p);
 
       // Генерация чисел Ca
-      let Ca = 7; // generatePrimeNumber(size);
+      let Ca = generatePrimeNumber(size);
 
       while (nod(Ca, p - 1)[0] !== 1) Ca = generatePrimeNumber(size);
       console.log("Ca:", Ca);
 
       // Генерация чисел Cb
-      let Cb = 5; // generatePrimeNumber(size);
+      let Cb = generatePrimeNumber(size);
 
       while (nod(Cb, p - 1)[0] !== 1) Cb = generatePrimeNumber(size);
       console.log("Cb:", Cb);

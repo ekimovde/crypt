@@ -72,27 +72,21 @@ export default {
   methods: {
     onSendMessage() {
       const { p, Ca, Cb, da, db } = this.primeNumbers;
-      console.log("p:", p, "Ca:", Ca, "Cb:", Cb, "da:", da, "db:", db);
 
       // Вычисление числа mi
       const mi = parseInt(this.message);
-      console.log("mi:", mi);
 
       // Шаг #1
       const x1 = exponentiationNumberMod(mi, Ca, p);
-      console.log("x1:", x1);
 
       // Шаг #2
       const x2 = exponentiationNumberMod(x1, Cb, p);
-      console.log("x2:", x2);
 
       // Шаг #3
       const x3 = exponentiationNumberMod(x2, da, p);
-      console.log("x3:", x3);
 
       // Шаг #4
       const x4 = exponentiationNumberMod(x3, db, p);
-      console.log("x4:", x4);
 
       this.localValue = {
         ...this.localValue,

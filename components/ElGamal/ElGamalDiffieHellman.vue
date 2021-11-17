@@ -61,8 +61,8 @@ export default {
   methods: {
     onGeneratePrimeNumbersDiffieHellman() {
       // Генерация чисел p, q
-      let p = 23; // generatePrimeNumber(this.localValue.size);
-      let q = 11; // p / 2 - 0.5;
+      let p = generatePrimeNumber(this.localValue.size);
+      let q = p / 2 - 0.5;
 
       while (!isPrime(q)) {
         p = generatePrimeNumber(this.localValue.size);
